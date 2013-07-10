@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<gedcom>
+<indi id="@I0001@">
+  <name>Elizabeth Alexandra Mary /Windsor/</name>
+  <sex>F</sex>
+  <birt>
+    <date>21 Apr 1926</date>
+    <plac>17 Bruton Street, London, W1</plac>
+  </birt>
+  <occu>Queen</occu>
+  <famc ref_id="@F0003@"></famc>
+  <fams ref_id="@F0001@"></fams>
+  <note ref_id="@N0002@"></note>
+  <chan>
+    <date>13 Dec 2003</date>
+  </chan>
+</indi>
+</gedcom>

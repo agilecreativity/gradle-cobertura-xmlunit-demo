@@ -1,0 +1,11 @@
+target
+.DS_Store
+*.class
+# Gradle file
+.gradle
+build
+bin
+# Eclipse
+.project
+.classpath
+.settings

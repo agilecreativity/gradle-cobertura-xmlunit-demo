@@ -1,0 +1,58 @@
+// {{{ list of plugins to use
+apply plugin: 'java'
+apply plugin: 'maven'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+// }}}
+
+// {{{ Cobertula settings - see: https://github.com/stevesaliman/gradle-cobertura-plugin
+buildscript {
+  repositories {
+    mavenCentral()
+  }
+  dependencies {
+    classpath "net.saliman:gradle-cobertura-plugin:1.1.2"
+  }
+}
+apply plugin: 'cobertura'
+// }}}
+
+// {{{ Main setttings
+group               = 'gradle-cobertura-xmlunit-demo'
+version             = '1.0-SNAPSHOT'
+description         = """Gradle Cobertura XmlUnit Example"""
+sourceCompatibility = 1.6
+targetCompatibility = 1.6
+
+repositories {
+  mavenRepo url: "http://repo.maven.apache.org/maven2"
+}
+
+dependencies {
+  compile group:     'org.hamcrest', name: 'hamcrest-all', version:'1.3'
+  compile group:     'log4j',        name: 'log4j',        version:'1.2.17'
+  testCompile group: 'junit',        name: 'junit',        version:'4.11'
+  testCompile group: 'xmlunit',      name: 'xmlunit',      version:'1.4'
+}
+// }}}
+
+// {{{ Java related settings
+test.testLogging { showStandardStreams = true }
+
+// set the default value for input_file if not specified
+if (!project.hasProperty('input_line')) {
+   project.ext.set('input_line', 'sample input line and more')
+}
+
+task(runMainClass, dependsOn: 'classes', type: JavaExec) {
+ description = """
+   Execute the main program of the Utils.java with -Pinput_line=<input-line-data>.
+  """
+  main      = 'com.agilecreativity.demo.gradle.Utils'
+  classpath = sourceSets.main.runtimeClasspath
+  args      = [ project.input_line ]
+}
+// }}}
+
+// Allow the user to type just 'gradle' or './gradlew' and run the default task
+defaultTasks 'clean', 'test', 'cobertura', 'runMainClass'
